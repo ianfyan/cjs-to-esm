@@ -1,109 +1,108 @@
-# JavaScript Code Transformer
+# cjs-to-esm
 
-## Overview
-This project provides a **JavaScript Code Transformer** that automatically converts CommonJS (`require` and `module.exports`) into ES Modules (`import` and `export`). The transformation is powered by **jscodeshift**.
+![npm](https://img.shields.io/npm/v/cjs-to-esm) ![license](https://img.shields.io/npm/l/cjs-to-esm)
 
-## Installation
-Ensure you have **Node.js** installed, then install dependencies:
-```bash
+Easily convert your **CommonJS (`require`, `module.exports`)** code into modern **ES Modules (`import`, `export`)** with this simple CLI tool powered by **jscodeshift**.
+
+## ✨ Features
+✅ Converts `module.exports` to `export default` or named exports.  
+✅ Transforms `require()` statements into `import` statements.  
+✅ Handles default exports, named exports, and JSON imports.  
+✅ Resolves relative paths for modules correctly.  
+✅ Converts `__dirname` and `__filename` to ES module-compatible syntax.  
+✅ Supports both **single file** and **batch processing**  
+
+&nbsp;
+
+## 📦 Installation
+```sh
+npm install cjs-to-esm -g
+```
+
+## 🚀 Usage
+```sh
+cjs-to-esm path/to/file.js
+```
+
+For example, to transform all files in the `src/` directory:
+```sh
+cjs-to-esm src/
+```
+
+&nbsp;
+
+## 📖 Examples
+
+### **🔹 Converting `module.exports` to `export default`**
+#### ✅ Before (CommonJS)
+```js
+const a = 1;
+const b = 2;
+module.exports = { a, b };
+```
+#### 🔄 After (ES Modules)
+```js
+const a = 1;
+const b = 2;
+export { a, b };
+```
+
+### **🔹 Converting `require()` to `import`**
+#### ✅ Before (CommonJS)
+```js
+const fs = require('fs');
+const { Server } = require('socket.io');
+```
+#### 🔄 After (ES Modules)
+```js
+import fs from 'fs';
+import socketIo from 'socket.io';
+
+const { Server } = socketIo;
+```
+
+### **🔹 Handling `__dirname` and `__filename`**
+#### ✅ Before (CommonJS)
+```js
+const path = require('path');
+const myDirname = path.resolve(__dirname, '../src/template');
+```
+#### 🔄 After (ES Modules)
+```js
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const myDirname = path.resolve(__dirname, '../src/template');
+```
+
+### **🔹 Converting JSON imports**
+#### ✅ Before (CommonJS)
+```js
+const packageJson = require('../package.json');
+```
+#### 🔄 After (ES Modules)
+```js
+import packageJson from '../package.json' with { type: 'json' };
+```
+
+&nbsp;
+
+## 🛠 Development
+Clone the repository:
+```sh
+git clone https://github.com/ianfyan/cjs-to-esm.git
+cd cjs-to-esm
 npm install
 ```
 
-## Usage
-Run the transformation script with the following command:
-```bash
-npm run convert -- path/to/file.js
-```
-For example, to transform all files in the `src/` directory:
-```bash
-npm run convert -- src/
+### 💚 Run conversion
+To test all functions:
+```sh
+npm convert path/to/file.js
 ```
 
-## Features
-- Converts:
-  ```js
-  const foo = require('foo');
-  ```
-  to
-  ```js
-  import foo from 'foo';
-  ```
-
-- Converts:
-  ```js
-  const { foo } = require('bar');
-  ```
-  to
-  ```js
-  import bar from 'bar';
-  const { foo } = bar;
-  ```
-
-- Converts:
-  ```js
-  module.exports = { foo, bar };
-  ```
-  to
-  ```js
-  export { foo, bar };
-  ```
-
-- Converts:
-  ```js
-  module.exports = someFunction;
-  ```
-  to
-  ```js
-  export default someFunction;
-  ```
-
-- Converts object literals with properties containing values directly to `export default`, for example:
-  ```js
-  module.exports = {
-    foo: 'value',
-    bar: 42
-  };
-  ```
-  to
-  ```js
-  export default {
-    foo: 'value',
-    bar: 42
-  };
-  ```
-
-- Converts `__dirname` and `__filename` from CommonJS to ES module compatible syntax:
-  ```js
-  const path = require('path');
-
-  const myDirname = path.resolve(__dirname, '../src/template');
-  console.log(myDirname);
-  ```
-  to
-  ```js
-  import path from 'path';
-  import { fileURLToPath } from 'url';
-
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-
-  const myDirname = path.resolve(__dirname, '../src/template');
-  console.log(myDirname);
-  ```
-
-- Converts `package.json` imports with `assert` to ES module syntax:
-  ```js
-  const packageJson = require('../package.json');
-  ```
-  to
-  ```js
-  import packageJson from '../package.json' assert { type: 'json' };
-  ```
-
-- Supports both **single file** and **batch processing**
-
-
-
-## Requirements
-- Node.js 14+
-- jscodeshift
+## 📄 License
+MIT License - Free to use and modify.
