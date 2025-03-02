@@ -1,6 +1,9 @@
 # cjs-to-esm
 
-![npm](https://img.shields.io/npm/v/cjs-to-esm) ![license](https://img.shields.io/npm/l/cjs-to-esm)
+![npm](https://img.shields.io/npm/v/@ianfyan/cjs-to-esm?color=blue) 
+![npm downloads](https://img.shields.io/npm/dt/@ianfyan/cjs-to-esm) 
+![license](https://img.shields.io/github/license/ianfyan/cjs-to-esm)
+
 
 Easily convert your **CommonJS (`require`, `module.exports`)** code into modern **ES Modules (`import`, `export`)** with this simple CLI tool powered by **jscodeshift**.
 
@@ -12,11 +15,10 @@ Easily convert your **CommonJS (`require`, `module.exports`)** code into modern 
 ✅ Converts `__dirname` and `__filename` to ES module-compatible syntax.  
 ✅ Supports both **single file** and **batch processing**  
 
-&nbsp;
 
 ## 📦 Installation
 ```sh
-npm install cjs-to-esm -g
+npm install @ianfyan/cjs-to-esm -g
 ```
 
 ## 🚀 Usage
@@ -29,7 +31,6 @@ For example, to transform all files in the `src/` directory:
 cjs-to-esm src/
 ```
 
-&nbsp;
 
 ## 📖 Examples
 
@@ -88,7 +89,6 @@ const packageJson = require('../package.json');
 import packageJson from '../package.json' with { type: 'json' };
 ```
 
-&nbsp;
 
 ## 🛠 Development
 Clone the repository:

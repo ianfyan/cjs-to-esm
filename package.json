@@ -1,7 +1,7 @@
 {
-  "name": "cjs-to-esm",
+  "name": "@ianfyan/cjs-to-esm",
   "version": "1.0.0",
-  "description": "",
+  "description": "Easily convert your CommonJS into ES Modules",
   "main": "index.js",
   "bin": {
     "cjs-to-esm": "./bin/index.js"
