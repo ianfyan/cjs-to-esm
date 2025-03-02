@@ -19,7 +19,23 @@
     "url": "git+https://github.com/ianfyan/cjs-to-esm.git"
   },
   "keywords": [
-    "converter"
+    "converter",
+    "commonjs", 
+    "esmodules", 
+    "cjs", 
+    "esm", 
+    "module", 
+    "import", 
+    "export", 
+    "require", 
+    "transform",
+    "migration", 
+    "babel",
+    "jscodeshift",
+    "javascript",
+    "nodejs", 
+    "modern-js", 
+    "cli-tool"
   ],
   "author": "ianfyan",
   "license": "MIT",

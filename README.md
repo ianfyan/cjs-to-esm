@@ -3,23 +3,6 @@
 ## Overview
 This project provides a **JavaScript Code Transformer** that automatically converts CommonJS (`require` and `module.exports`) into ES Modules (`import` and `export`). The transformation is powered by **jscodeshift**.
 
-## Folder Structure
-```
-/project-root
-  ├── src
-  │   ├── index.js                  # Main transformation logic
-  │   ├── cli
-  │   │   ├── index.js              # CLI script to run the transformation
-  │   └── transformers
-  │       ├── helpers.js            # Helper functions
-  │       ├── index.js              # index folder
-  │       ├── transformDirname.js   # Handles __dirname transformation
-  │       ├── transformExports.js   # Handles module.exports → export transformation
-  │       ├── transformRequire.js   # Handles require() → import transformation
-  ├── package.json
-  ├── README.md
-```
-
 ## Installation
 Ensure you have **Node.js** installed, then install dependencies:
 ```bash
