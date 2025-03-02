@@ -1,3 +1,5 @@
+const { createExportSpecifier } = require('./helpers');
+
 /**
  * Transforms `module.exports` assignments into ES module export statements.
  *
@@ -50,9 +52,11 @@ function transformExport(root, j) {
         const exportDecl = j.exportDefaultDeclaration(right);
         j(path.parent).replaceWith(exportDecl);
       } else if (allShorthand && spreadProps.length === 0) {
-        // Convert to: export default { foo, bar };
-        const exportDecl = j.exportDefaultDeclaration(right);
-
+        // Convert to: export { foo, bar };
+        const exportSpecifiers = validProps.map(prop =>
+          createExportSpecifier(j, prop.key.name)
+        );
+        const exportDecl = j.exportNamedDeclaration(null, exportSpecifiers);
         j(path.parent).replaceWith(exportDecl);
       } else {
         // Convert to: export default { ...module, foo: foo, bar: bar };
